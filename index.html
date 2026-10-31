@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Typing Practice with Rutvik Gawali</title>
+    <title>Typing Practice by Rutvik Gawali</title>
     <style>
         :root {
             --bg-color: #f1f5f9;
@@ -217,7 +217,7 @@
 
     <div class="container">
         <header>
-            <h1>Typing Practice with Rutvik Gawali</h1>
+            <h1>Typing Practice by Rutvik Gawali</h1>
             <p>GCCTBC Pattern Practice Platform</p>
         </header>
 
@@ -269,7 +269,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 Typing Practice with Rutvik Gawali. All rights reserved.</p>
+        <p>&copy; 2026 Typing Practice by Rutvik Gawali. All rights reserved.</p>
     </footer>
 
     <script>
@@ -381,11 +381,9 @@
             clearInterval(timer);
             answerBox.disabled = true;
 
-            // Calculate final marks out of 40 based on accuracy and WPM
             let finalWpm = parseInt(wpmTag.innerText) || 0;
             let finalAcc = parseInt(accuracyTag.innerText) || 100;
             
-            // Formula for GCCTBC style score out of 40
             let calculatedMarks = Math.round((finalAcc / 100) * 40);
             if (calculatedMarks > 40) calculatedMarks = 40;
 
