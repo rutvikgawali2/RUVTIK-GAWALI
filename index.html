@@ -1,323 +1,310 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Typing Practice by Rutvik Gawali</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
-
-        body {
-            background-color: #f7f9fc;
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 900px;
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            margin-top: 20px;
-        }
-
-        h1 {
-            color: #007bff;
-            font-size: 26px;
-            text-align: center;
-            margin-bottom: 5px;
-        }
-
-        .subtitle {
-            text-align: center;
-            color: #6c757d;
-            font-size: 14px;
-            margin-bottom: 25px;
-        }
-
-        .controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #f8f9fa;
-            padding: 15px 20px;
-            border-radius: 6px;
-            margin-bottom: 25px;
-            border: 1px solid #e9ecef;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .control-group {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 15px;
-            font-weight: 500;
-        }
-
-        select {
-            padding: 8px 12px;
-            border-radius: 4px;
-            border: 1px solid #ced4da;
-            background: #fff;
-            font-size: 14px;
-            outline: none;
-            cursor: pointer;
-        }
-
-        .workspace {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 25px;
-        }
-
-        @media (max-width: 768px) {
-            .workspace {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .box-container {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .box-label {
-            font-weight: 600;
-            font-size: 15px;
-            color: #495057;
-        }
-
-        .text-box {
-            height: 180px;
-            border: 1px solid #ced4da;
-            border-radius: 6px;
-            padding: 15px;
-            font-size: 16px;
-            line-height: 1.5;
-            background: #fff;
-            overflow-y: auto;
-            resize: none;
-            outline: none;
-        }
-
-        .text-box:focus {
-            border-color: #80bdff;
-            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-        }
-
-        .actions {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        button {
-            padding: 10px 24px;
-            font-size: 15px;
-            font-weight: 600;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .btn-submit {
-            background-color: #17a2b8;
-            color: white;
-        }
-
-        .btn-submit:hover {
-            background-color: #138496;
-        }
-
-        .btn-reset {
-            background-color: #6c757d;
-            color: white;
-        }
-
-        .btn-reset:hover {
-            background-color: #5a6268;
-        }
-
-        footer {
-            margin-top: auto;
-            text-align: center;
-            font-size: 13px;
-            color: #6c757d;
-            padding: 20px 0;
-        }
-
-        /* Typing Highlight Styles */
-        .char-correct {
-            color: #28a745;
-        }
-
-        .char-incorrect {
-            color: #dc3545;
-            background-color: #f8d7da;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<title>Typing Site By Rutvik Gawali</title>
+<meta name="author" content="Rutvik Gawali">
+<meta name="description" content="Practice makes progress, not perfect.">
+<meta name="keywords" content="gcctbc, result, speed, passage, practice, gcc, typing">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Typing Site By Rutvik Gawali">
+<meta property="og:description" content="Practice makes progress, not perfect.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Typing Site By Rutvik Gawali">
+<meta name="twitter:description" content="Practice makes progress, not perfect.">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#f5f7fb; --card:#ffffff; --text:#1c2333; --muted:#6b7487; --line:#e1e5ee;
+  --brand:#2f5bea; --brand-d:#2347c0; --ok:#1e9e5a; --bad:#d6334b; --bad-bg:#fde6ea; --ok-bg:#e3f6ec;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--text);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans","Noto Sans Devanagari",sans-serif;min-height:100vh}
+header{text-align:center;padding:32px 16px 8px}
+header h1{margin:0;font-size:1.6rem}
+header p{margin:6px 0 0;color:var(--muted)}
+header .by{margin-top:10px;font-size:.95rem}
+main{max-width:720px;margin:0 auto;padding:16px}
+.steps{display:flex;gap:8px;justify-content:center;margin:12px 0 20px;flex-wrap:wrap}
+.step{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:.9rem}
+.step b{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;border:1.5px solid var(--line);font-size:.85rem}
+.step.active{color:var(--text)}
+.step.active b{background:var(--brand);border-color:var(--brand);color:#fff}
+.step.done b{background:var(--ok);border-color:var(--ok);color:#fff}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px}
+.card h2{margin:0 0 4px;font-size:1.2rem}
+.card .sub{margin:0 0 18px;color:var(--muted)}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.opt{padding:14px;border:1.5px solid var(--line);border-radius:10px;background:transparent;color:var(--text);font:inherit;font-weight:600;cursor:pointer}
+.opt:hover{border-color:var(--brand)}
+.opt.sel{border-color:var(--brand);background:color-mix(in srgb,var(--brand) 12%,transparent)}
+.summary{list-style:none;padding:0;margin:0}
+.summary li{padding:10px 0;border-bottom:1px solid var(--line)}
+.summary li:last-child{border:0}
+.nav{display:flex;justify-content:space-between;margin-top:20px}
+.btn{padding:10px 22px;border-radius:9px;border:1.5px solid var(--brand);background:var(--brand);color:#fff;font:inherit;font-weight:600;cursor:pointer}
+.btn:hover{background:var(--brand-d)}
+.btn.ghost{background:transparent;color:var(--brand)}
+.btn[disabled]{opacity:.4;cursor:not-allowed}
+:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+.hidden{display:none!important}
+/* practice: full-screen vertical layout */
+#practice{position:fixed;inset:0;width:100%;max-width:640px;margin:0 auto;background:var(--card);border-left:1px solid var(--line);border-right:1px solid var(--line);display:flex;flex-direction:column;padding:12px;gap:12px;z-index:5}
+#practice.hidden{display:none!important}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.topbar .ttl{font-weight:600}
+.timer{font-size:1.5rem;font-weight:700;font-variant-numeric:tabular-nums;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:4px 16px}
+.pane{flex:1 1 0;min-height:0;background:var(--bg);border:1px solid var(--line);border-radius:12px}
+.passage{position:relative;padding:16px;font-size:1.25rem;line-height:1.9;overflow:auto;user-select:none}
+.passage .c{border-radius:3px}
+.passage .ok{color:var(--ok)}
+.passage .bad{color:var(--bad);background:var(--bad-bg)}
+.passage .cur{background:color-mix(in srgb,var(--brand) 30%,transparent)}
+textarea{width:100%;padding:16px;border:1.5px solid var(--line);background:var(--bg);color:var(--text);font:inherit;font-size:1.25rem;line-height:1.9;resize:none}
+textarea.pane{display:block}
+.actions{display:flex;justify-content:space-between}
+.res{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:16px 0}
+.res div{border:1px solid var(--line);border-radius:10px;padding:14px;text-align:center}
+.res b{display:block;font-size:1.6rem}
+.res span{color:var(--muted);font-size:.85rem}
+.verdict{padding:12px 14px;border-radius:10px;font-weight:600}
+.verdict.pass{background:var(--ok-bg);color:var(--ok)}
+.verdict.fail{background:var(--bad-bg);color:var(--bad)}
+footer{text-align:center;color:var(--muted);font-size:.85rem;padding:24px 16px}
+</style>
 </head>
 <body>
+<header>
+  <h1>GCC-TBC &rarr; Typing Practice</h1>
+  <p>Prepare for Govt. Typing Exam</p>
+  <p class="by">By <strong>Rutvik Gawali</strong></p>
+</header>
 
-    <div class="container">
-        <h1>Typing Practice by Rutvik Gawali</h1>
-        <div class="subtitle">GCCTBC Pattern Practice Platform</div>
-
-        <div class="controls">
-            <div class="control-group">
-                <label for="passageSelect">Select Passage:</label>
-                <select id="passageSelect" onchange="loadPassage()">
-                    <option value="0">English 40 WPM - Passage 2</option>
-                    <option value="1">English 30 WPM - Passage 1</option>
-                    <option value="2">Marathi / General - Passage 3</option>
-                </select>
-            </div>
-            <div class="control-group">
-                <span>Time: <strong id="timer">60</strong>s</span>
-                <span>WPM: <strong id="wpm">0</strong></span>
-                <span>Accuracy: <strong id="accuracy">100</strong>%</span>
-            </div>
-        </div>
-
-        <div class="workspace">
-            <div class="box-container">
-                <div class="box-label">Question Passage</div>
-                <div id="questionPassage" class="text-box"></div>
-            </div>
-            <div class="box-container">
-                <div class="box-label">Type Here</div>
-                <textarea id="typeInput" class="text-box" placeholder="Start typing here..." oninput="startTypingTest()" disabled></textarea>
-            </div>
-        </div>
-
-        <div class="actions">
-            <button class="btn-submit" onclick="submitTest()">Submit Test</button>
-            <button class="btn-reset" onclick="resetTest()">Reset</button>
-        </div>
+<main>
+  <!-- Wizard -->
+  <section id="wizard">
+    <div class="steps" id="steps">
+      <div class="step active" data-s="1"><b>1</b>Language</div>
+      <div class="step" data-s="2"><b>2</b>Speed</div>
+      <div class="step" data-s="3"><b>3</b>Time Race?</div>
+      <div class="step" data-s="4"><b>&#10003;</b>Ready</div>
     </div>
 
-    <footer>
-        © 2026 Typing Practice by Rutvik Gawali. All rights reserved.
-    </footer>
+    <div class="card">
+      <div data-pane="1">
+        <h2>Choose your language</h2>
+        <p class="sub">Pick the language you want to practice in.</p>
+        <div class="opts" data-key="lang">
+          <button class="opt sel" data-v="English">English</button>
+          <button class="opt" data-v="Marathi">Marathi</button>
+          <button class="opt" data-v="Hindi">Hindi</button>
+        </div>
+      </div>
 
-    <script>
-        const passages = [
-            "Technology is evolving rapidly every single day. Learning how to type fast and efficiently is an essential skill in the modern digital world, whether you are coding, writing reports, or communicating online effectively.",
-            "Consistency and dedication are key elements when mastering any new skill. Regular practice builds muscle memory in your fingers, allowing you to type smoothly without looking down at the keyboard constantly.",
-            "तंत्रज्ञान वेगाने विकसित होत आहे. संगणकावर जलद आणि अचूक टायपिंग करणे आजच्या डिजिटल युगात अत्यंत महत्त्वाचे कौशल्य बनले आहे, ज्याचा फायदा व्यावसायिक आणि वैयक्तिक आयुष्यात होतो."
-        ];
+      <div data-pane="2" class="hidden">
+        <h2>Select target speed</h2>
+        <p class="sub">Words per minute you want to reach.</p>
+        <div class="opts" data-key="speed">
+          <button class="opt" data-v="30">30 WPM</button>
+          <button class="opt sel" data-v="40">40 WPM</button>
+          <button class="opt" data-v="50">50 WPM</button>
+          <button class="opt" data-v="60">60 WPM</button>
+        </div>
+      </div>
 
-        let timer = 60;
-        let timerInterval = null;
-        let isStarted = false;
+      <div data-pane="3" class="hidden">
+        <h2>Practice with time limit of 7 minutes?</h2>
+        <p class="sub">Time race ends your practice automatically at 7:00.</p>
+        <div class="opts" data-key="timed">
+          <button class="opt" data-v="Yes">Yes</button>
+          <button class="opt sel" data-v="No">No</button>
+        </div>
+      </div>
 
-        const passageSelect = document.getElementById('passageSelect');
-        const questionPassage = document.getElementById('questionPassage');
-        const typeInput = document.getElementById('typeInput');
-        const timerDisplay = document.getElementById('timer');
-        const wpmDisplay = document.getElementById('wpm');
-        const accuracyDisplay = document.getElementById('accuracy');
+      <div data-pane="4" class="hidden">
+        <h2>Ready to start?</h2>
+        <p class="sub">Review your choices and begin practice.</p>
+        <ul class="summary">
+          <li><strong>Language:</strong> <span id="s-lang"></span></li>
+          <li><strong>Speed:</strong> <span id="s-speed"></span> WPM</li>
+          <li><strong>Timed:</strong> <span id="s-timed"></span></li>
+        </ul>
+      </div>
 
-        function loadPassage() {
-            resetTest();
-            const selectedText = passages[passageSelect.value];
-            questionPassage.innerHTML = selectedText.split('').map(char => `<span>${char}</span>`).join('');
-            typeInput.disabled = false;
-        }
+      <div class="nav">
+        <button class="btn ghost" id="back">Back</button>
+        <button class="btn" id="next">Next</button>
+      </div>
+    </div>
+  </section>
 
-        function startTypingTest() {
-            if (!isStarted) {
-                isStarted = true;
-                timerInterval = setInterval(() => {
-                    if (timer > 0) {
-                        timer--;
-                        timerDisplay.innerText = timer;
-                        calculateStats();
-                    } else {
-                        stopTest();
-                    }
-                }, 1000);
-            }
-            calculateStats();
-        }
+  <!-- Practice -->
+  <section id="practice" class="hidden">
+    <div class="topbar">
+      <span class="ttl">GCC-TBC &rarr; Typing Practice</span>
+      <span class="timer" id="t-time">0:00</span>
+    </div>
+    <div class="passage pane" id="passage" aria-label="Passage to type"></div>
+    <textarea class="pane" id="input" placeholder="Start typing here..." autocomplete="off" autocapitalize="off" spellcheck="false"></textarea>
+    <div class="actions">
+      <button class="btn ghost" id="quit">Quit</button>
+      <button class="btn" id="finish">Finish</button>
+    </div>
+  </section>
 
-        function calculateStats() {
-            const originalText = passages[passageSelect.value];
-            const typedText = typeInput.value;
-            const questionSpans = questionPassage.getElementsByTagName('span');
+  <!-- Result -->
+  <section id="result" class="hidden">
+    <div class="card">
+      <h2>Your result</h2>
+      <div class="res">
+        <div><b id="r-gross">0</b><span>Gross WPM</span></div>
+        <div><b id="r-net">0</b><span>Net WPM</span></div>
+        <div><b id="r-acc">0%</b><span>Accuracy</span></div>
+        <div><b id="r-time">0:00</b><span>Time taken</span></div>
+      </div>
+      <div class="verdict" id="verdict"></div>
+      <div class="nav">
+        <button class="btn ghost" id="again">Practice again</button>
+        <button class="btn" id="home">Change settings</button>
+      </div>
+    </div>
+  </section>
+</main>
 
-            let correctChars = 0;
+<footer>Practice makes progress, not perfect.</footer>
 
-            for (let i = 0; i < questionSpans.length; i++) {
-                if (i < typedText.length) {
-                    if (typedText[i] === originalText[i]) {
-                        questionSpans[i].className = 'char-correct';
-                        correctChars++;
-                    } else {
-                        questionSpans[i].className = 'char-incorrect';
-                    }
-                } else {
-                    questionSpans[i].className = '';
-                }
-            }
+<script>
+(function(){
+  // ---- Passages (add more strings to any list) ----
+  var PASSAGES = {
+    English: [
+      "Typing is a skill that improves with steady practice. Sit upright, keep your wrists relaxed, and let your fingers rest on the home row. Focus first on accuracy, because speed follows naturally once your fingers know where every key lives. A few minutes of careful practice each day is far better than one long session once a week. Keep going, and you will see your results improve.",
+      "A government typing examination tests both speed and accuracy. Candidates are expected to type a given passage within the allotted time with very few mistakes. Read a few words ahead while you type, do not stop to fix every small error, and keep a calm rhythm from the first line to the last. Regular mock tests will build the confidence you need on the day of the exam."
+    ],
+    Marathi: [
+      "टायपिंग हे नियमित सरावाने सुधारणारे कौशल्य आहे. सरळ बसा, मनगट सैल ठेवा आणि बोटे योग्य ठिकाणी ठेवा. सुरुवातीला वेगापेक्षा अचूकतेवर लक्ष द्या, कारण अचूकता आली की वेग आपोआप वाढतो. आठवड्यातून एकदा दीर्घ सराव करण्यापेक्षा दररोज थोडा वेळ सराव करणे अधिक फायदेशीर असते.",
+      "शासकीय टायपिंग परीक्षेत वेग आणि अचूकता या दोन्हींची चाचणी घेतली जाते. दिलेल्या वेळेत उतारा कमीत कमी चुकांसह टाइप करणे अपेक्षित असते. टाइप करताना शांत राहा, प्रत्येक लहान चुकीवर थांबू नका आणि पहिल्या ओळीपासून शेवटच्या ओळीपर्यंत एकसारखी लय ठेवा."
+    ],
+    Hindi: [
+      "टाइपिंग एक ऐसा कौशल्य है जो लगातार अभ्यास से बेहतर होता है। सीधे बैठें, कलाई को ढीला रखें और उंगलियों को सही जगह पर रखें। शुरुआत में गति से ज़्यादा शुद्धता पर ध्यान दें, क्योंकि शुद्धता आ जाने पर गति अपने आप बढ़ जाती है। सप्ताह में एक बार लंबा अभ्यास करने से बेहतर है कि रोज़ थोड़ा समय अभ्यास किया जाए।",
+      "सरकारी टाइपिंग परीक्षा में गति और शुद्धता दोनों की जाँच की जाती है। दिए गए समय में अनुच्छेद को कम से कम गलतियों के साथ टाइप करना होता है। टाइप करते समय शांत रहें, हर छोटी गलती पर न रुकें और पहली पंक्ति से अंतिम पंक्ति तक एक समान लय बनाए रखें।"
+    ]
+  };
 
-            // Accuracy calculation
-            let accuracy = typedText.length > 0 ? Math.round((correctChars / typedText.length) * 100) : 100;
-            accuracyDisplay.innerText = accuracy;
+  var $ = function(s){return document.querySelector(s)};
+  var $$ = function(s){return Array.prototype.slice.call(document.querySelectorAll(s))};
+  var cfg = {lang:"English", speed:"40", timed:"No"};
+  var step = 1;
 
-            // WPM calculation (Standard: (characters / 5) / minutes)
-            let timeElapsed = 60 - timer;
-            if (timeElapsed > 0) {
-                let wpm = Math.round((typedText.length / 5) / (timeElapsed / 60));
-                wpmDisplay.innerText = wpm;
-            }
+  // ---- Wizard ----
+  function showStep(n){
+    step = n;
+    $$("[data-pane]").forEach(function(p){p.classList.toggle("hidden", +p.dataset.pane !== n)});
+    $$(".step").forEach(function(s){
+      var i = +s.dataset.s;
+      s.classList.toggle("active", i === n);
+      s.classList.toggle("done", i < n);
+    });
+    $("#back").style.visibility = n === 1 ? "hidden" : "visible";
+    $("#next").textContent = n === 4 ? "Start" : "Next";
+    if(n === 4){
+      $("#s-lang").textContent = cfg.lang;
+      $("#s-speed").textContent = cfg.speed;
+      $("#s-timed").textContent = cfg.timed;
+    }
+  }
+  $$(".opts").forEach(function(group){
+    group.addEventListener("click", function(e){
+      var b = e.target.closest(".opt"); if(!b) return;
+      group.querySelectorAll(".opt").forEach(function(o){o.classList.remove("sel")});
+      b.classList.add("sel");
+      cfg[group.dataset.key] = b.dataset.v;
+    });
+  });
+  $("#back").onclick = function(){ if(step > 1) showStep(step - 1) };
+  $("#next").onclick = function(){ step < 4 ? showStep(step + 1) : startPractice() };
 
-            if (typedText.length >= originalText.length) {
-                stopTest();
-            }
-        }
+  // ---- Practice ----
+  var text = "", startTime = 0, timer = null, running = false, LIMIT = 7 * 60;
 
-        function stopTest() {
-            clearInterval(timerInterval);
-            typeInput.disabled = true;
-        }
+  function fmt(s){ s = Math.max(0, Math.floor(s)); return Math.floor(s/60) + ":" + String(s%60).padStart(2,"0") }
+  function pick(){
+    var list = PASSAGES[cfg.lang];
+    return list[Math.floor(Math.random() * list.length)];
+  }
+  function show(id){
+    ["wizard","practice","result"].forEach(function(s){ $("#"+s).classList.toggle("hidden", s !== id) });
+  }
+  function startPractice(){
+    text = pick();
+    $("#input").value = "";
+    $("#input").lang = cfg.lang === "English" ? "en" : (cfg.lang === "Marathi" ? "mr" : "hi");
+    render();
+    $("#t-time").textContent = cfg.timed === "Yes" ? fmt(LIMIT) : "0:00";
+    running = false; startTime = 0; clearInterval(timer);
+    show("practice");
+    $("#input").focus();
+  }
+  function render(){
+    var p = $("#passage");
+    if(p.dataset.t !== text){ p.textContent = text; p.dataset.t = text; p.scrollTop = 0; }
+  }
+  function stats(typed, secs){
+    var correct = 0;
+    for(var i = 0; i < typed.length; i++) if(typed[i] === text[i]) correct++;
+    var mins = Math.max(secs, 1) / 60;
+    var gross = Math.round((typed.length / 5) / mins);
+    var net = Math.max(0, Math.round((correct / 5) / mins));
+    var acc = typed.length ? Math.round(correct / typed.length * 100) : 100;
+    return {gross:gross, net:net, acc:acc};
+  }
+  function tick(){
+    var secs = (Date.now() - startTime) / 1000;
+    if(cfg.timed === "Yes"){
+      var left = LIMIT - secs;
+      $("#t-time").textContent = fmt(left);
+      if(left <= 0) finish();
+    } else {
+      $("#t-time").textContent = fmt(secs);
+    }
+  }
+  $("#input").addEventListener("input", function(){
+    var typed = this.value;
+    if(!running && typed.length){
+      running = true; startTime = Date.now();
+      timer = setInterval(tick, 500);
+    }
+    if(typed.length >= text.length) finish();
+  });
+  function finish(){
+    if(!running){ show("wizard"); showStep(4); return; }
+    clearInterval(timer); running = false;
+    var secs = Math.min((Date.now() - startTime) / 1000, cfg.timed === "Yes" ? LIMIT : 1e9);
+    var typed = $("#input").value;
+    var st = stats(typed, secs);
+    $("#r-gross").textContent = st.gross;
+    $("#r-net").textContent = st.net;
+    $("#r-acc").textContent = st.acc + "%";
+    $("#r-time").textContent = fmt(secs);
+    var ok = st.net >= +cfg.speed;
+    var v = $("#verdict");
+    v.className = "verdict " + (ok ? "pass" : "fail");
+    v.textContent = ok
+      ? "Target reached! You typed " + st.net + " net WPM against a target of " + cfg.speed + "."
+      : "Target not reached yet. You typed " + st.net + " net WPM against a target of " + cfg.speed + ". Keep practicing.";
+    show("result");
+  }
+  $("#finish").onclick = finish;
+  $("#quit").onclick = function(){ clearInterval(timer); running = false; show("wizard"); showStep(4) };
+  $("#again").onclick = startPractice;
+  $("#home").onclick = function(){ show("wizard"); showStep(1) };
 
-        function submitTest() {
-            stopTest();
-            alert(`Test Submitted!\nYour WPM: ${wpmDisplay.innerText}\nAccuracy: ${accuracyDisplay.innerText}%`);
-        }
-
-        function resetTest() {
-            stopTest();
-            timer = 60;
-            isStarted = false;
-            timerDisplay.innerText = timer;
-            wpmDisplay.innerText = '0';
-            accuracyDisplay.innerText = '100';
-            typeInput.value = '';
-            loadPassage();
-        }
-
-        // Initialize on load
-        window.onload = () => {
-            loadPassage();
-        };
-    </script>
+  showStep(1);
+})();
+</script>
 </body>
 </html>
