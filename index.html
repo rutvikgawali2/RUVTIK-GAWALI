@@ -6,7 +6,7 @@
     <title>Typing Practice with Rutvik Gawali</title>
     <style>
         :root {
-            --bg-color: #f8fafc;
+            --bg-color: #f1f5f9;
             --card-bg: #ffffff;
             --text-color: #1e293b;
             --text-muted: #64748b;
@@ -41,7 +41,7 @@
 
         header {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         header h1 {
@@ -56,13 +56,33 @@
             font-size: 0.95rem;
         }
 
-        .stats-bar {
+        .toolbar {
             display: flex;
             justify-content: space-between;
-            background: #f1f5f9;
+            align-items: center;
+            background: #f8fafc;
             padding: 12px 20px;
             border-radius: 8px;
             margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .toolbar select {
+            padding: 8px 12px;
+            font-size: 0.95rem;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            outline: none;
+            background: #fff;
+            color: var(--text-color);
+            cursor: pointer;
+        }
+
+        .stats-group {
+            display: flex;
+            gap: 20px;
             font-weight: 600;
         }
 
@@ -97,7 +117,7 @@
             border: 2px solid var(--border-color);
             border-radius: 8px;
             padding: 15px;
-            height: 200px;
+            height: 220px;
             overflow-y: auto;
             font-size: 1.1rem;
             line-height: 1.6;
@@ -153,6 +173,37 @@
             opacity: 0.9;
         }
 
+        /* Result Modal */
+        #result-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .modal-content {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .modal-content h2 {
+            color: var(--accent-color);
+            margin-top: 0;
+        }
+
+        .modal-content p {
+            font-size: 1.1rem;
+            margin: 10px 0;
+        }
+
         footer {
             margin-top: auto;
             text-align: center;
@@ -167,13 +218,23 @@
     <div class="container">
         <header>
             <h1>Typing Practice with Rutvik Gawali</h1>
-            <p>GCCTBC Pattern Vertical Practice Layout</p>
+            <p>GCCTBC Pattern Practice Platform</p>
         </header>
 
-        <div class="stats-bar">
-            <div>Time Left: <span id="time">60</span>s</div>
-            <div>WPM: <span id="wpm">0</span></div>
-            <div>Accuracy: <span id="accuracy">100</span>%</div>
+        <div class="toolbar">
+            <div>
+                <label for="subject-select" style="font-weight: bold; margin-right: 8px;">Select Passage:</label>
+                <select id="subject-select" onchange="changeSubject()">
+                    <option value="0">English 30 WPM - Passage 1</option>
+                    <option value="1">English 40 WPM - Passage 2</option>
+                    <option value="2">Marathi / General - Passage 3</option>
+                </select>
+            </div>
+            <div class="stats-group">
+                <div>Time: <span id="time">60</span>s</div>
+                <div>WPM: <span id="wpm">0</span></div>
+                <div>Accuracy: <span id="accuracy">100</span>%</div>
+            </div>
         </div>
 
         <div class="workspace">
@@ -191,7 +252,19 @@
         </div>
 
         <div class="controls">
-            <button onclick="resetTest()">Reset / Try Again</button>
+            <button onclick="submitTest()">Submit Test</button>
+            <button onclick="resetTest()" style="background-color: #64748b;">Reset</button>
+        </div>
+    </div>
+
+    <!-- Result Popup Modal -->
+    <div id="result-modal">
+        <div class="modal-content">
+            <h2>Test Completed!</h2>
+            <p><strong>Marks:</strong> <span id="res-marks">0</span> / 40</p>
+            <p><strong>Speed:</strong> <span id="res-wpm">0</span> WPM</p>
+            <p><strong>Accuracy:</strong> <span id="res-acc">0</span>%</p>
+            <button onclick="closeModal()" style="margin-top: 15px;">Try Again</button>
         </div>
     </div>
 
@@ -200,14 +273,20 @@
     </footer>
 
     <script>
-        const sampleText = "Practice makes a man perfect. Regular typing practice helps you to increase your typing speed and accuracy significantly. Keep your fingers on the home row keys and focus on precision before speed in your daily routine.";
+        const passages = [
+            "Practice makes a man perfect. Regular typing practice helps you to increase your typing speed and accuracy significantly. Keep your fingers on the home row keys and focus on precision before speed in your daily routine.",
+            "Technology is evolving rapidly every single day. Learning how to type fast and efficiently is an essential skill in the modern digital world, whether you are coding, writing reports, or communicating online effectively.",
+            "Consistency is the key to mastering any new skill. Dedicate a few minutes everyday to practice typing without looking at the keyboard, and you will notice a massive improvement in your overall performance."
+        ];
 
+        let currentPassageIndex = 0;
         const questionBox = document.getElementById("question-box");
         const answerBox = document.getElementById("answer-box");
         const timeTag = document.getElementById("time");
         const wpmTag = document.getElementById("wpm");
         const accuracyTag = document.getElementById("accuracy");
-
+        const resultModal = document.getElementById("result-modal");
+        
         let maxTime = 60;
         let timeLeft = maxTime;
         let timer = null;
@@ -215,12 +294,19 @@
 
         function loadText() {
             questionBox.innerHTML = "";
-            sampleText.split("").forEach(char => {
+            let text = passages[currentPassageIndex];
+            text.split("").forEach(char => {
                 let span = document.createElement("span");
                 span.innerText = char;
                 span.classList.add("question-char");
                 questionBox.appendChild(span);
             });
+        }
+
+        function changeSubject() {
+            const select = document.getElementById("subject-select");
+            currentPassageIndex = parseInt(select.value);
+            resetTest();
         }
 
         function resetTest() {
@@ -232,6 +318,7 @@
             accuracyTag.innerText = 100;
             answerBox.value = "";
             answerBox.disabled = false;
+            resultModal.style.display = "none";
             loadText();
         }
 
@@ -246,7 +333,6 @@
             }
 
             let errors = 0;
-
             characters.forEach((charSpan, index) => {
                 let typedChar = typedChars[index];
                 if (typedChar == null) {
@@ -261,7 +347,6 @@
                 }
             });
 
-            // Calculate WPM and Accuracy
             let charIndex = typedChars.length;
             let correctChars = charIndex - errors;
             let timeElapsed = maxTime - timeLeft;
@@ -278,10 +363,8 @@
             }
             accuracyTag.innerText = accuracy < 0 ? 0 : accuracy;
 
-            // Stop if finished text
             if (charIndex >= characters.length) {
-                clearInterval(timer);
-                answerBox.disabled = true;
+                submitTest();
             }
         });
 
@@ -290,9 +373,32 @@
                 timeLeft--;
                 timeTag.innerText = timeLeft;
             } else {
-                clearInterval(timer);
-                answerBox.disabled = true;
+                submitTest();
             }
+        }
+
+        function submitTest() {
+            clearInterval(timer);
+            answerBox.disabled = true;
+
+            // Calculate final marks out of 40 based on accuracy and WPM
+            let finalWpm = parseInt(wpmTag.innerText) || 0;
+            let finalAcc = parseInt(accuracyTag.innerText) || 100;
+            
+            // Formula for GCCTBC style score out of 40
+            let calculatedMarks = Math.round((finalAcc / 100) * 40);
+            if (calculatedMarks > 40) calculatedMarks = 40;
+
+            document.getElementById("res-marks").innerText = calculatedMarks;
+            document.getElementById("res-wpm").innerText = finalWpm;
+            document.getElementById("res-acc").innerText = finalAcc;
+
+            resultModal.style.display = "flex";
+        }
+
+        function closeModal() {
+            resultModal.style.display = "none";
+            resetTest();
         }
 
         loadText();
