@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Practice with Rutvik Gawali</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-color: #38bdf8;
+            --error-color: #f43f5e;
+            --success-color: #10b981;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        header h1 {
+            margin-bottom: 5px;
+            color: var(--accent-color);
+            font-size: 1.8rem;
+        }
+
+        header p {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 25px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .stat-box {
+            font-size: 1.1rem;
+        }
+
+        .stat-box span {
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .typing-area {
+            position: relative;
+            background: rgba(0, 0, 0, 0.2);
+            border: 2px solid #334155;
+            border-radius: 10px;
+            padding: 20px;
+            font-size: 1.3rem;
+            line-height: 1.8;
+            text-align: left;
+            margin-bottom: 25px;
+            user-select: none;
+            max-height: 180px;
+            overflow: hidden;
+            word-break: break-all;
+        }
+
+        .typing-area span {
+            position: relative;
+        }
+
+        .typing-area span.correct {
+            color: var(--success-color);
+        }
+
+        .typing-area span.incorrect {
+            color: var(--error-color);
+            background-color: rgba(244, 63, 94, 0.2);
+            border-radius: 3px;
+        }
+
+        .typing-area span.active {
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        /* Hidden input to capture keystrokes */
+        #input-field {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        button {
+            background-color: var(--accent-color);
+            color: #0f172a;
+            border: none;
+            padding: 10px 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        footer {
+            margin-top: 20px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Typing Practice with Rutvik Gawali</h1>
+            <p>Improve your typing speed and accuracy seamlessly.</p>
+        </header>
+
+        <div class="stats-container">
+            <div class="stat-box">Time Left: <span id="time">60</span>s</div>
+            <div class="stat-box">WPM: <span id="wpm">0</span></div>
+            <div class="stat-box">Accuracy: <span id="accuracy">100</span>%</div>
+        </div>
+
+        <input type="text" id="input-field">
+        
+        <div class="typing-area" id="typing-area" onclick="document.getElementById('input-field').focus();">
+            <!-- Text will be loaded dynamically via JavaScript -->
+        </div>
+
+        <div class="controls">
+            <button id="reset-btn" onclick="loadParagraph()">Try Again</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Typing Practice with Rutvik Gawali. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const paragraphs = [
+            "Practice makes a man perfect. Regular typing practice helps you to increase your typing speed and accuracy significantly. Keep your fingers on the home row keys and focus on precision before speed.",
+            "Technology is evolving rapidly every single day. Learning how to type fast and efficiently is an essential skill in the modern digital world, whether you are coding, writing reports, or communicating online.",
+            "Consistency is the key to mastering any new skill. Dedicate a few minutes everyday to practice typing without looking at the keyboard, and you will notice a massive improvement in your performance."
+        ];
+
+        const typingArea = document.getElementById("typing-area");
+        const inputField = document.getElementById("input-field");
+        const timeTag = document.getElementById("time");
+        const wpmTag = document.getElementById("wpm");
+        const accuracyTag = document.getElementById("accuracy");
+        const resetBtn = document.getElementById("reset-btn");
+
+        let timer;
+        let maxTime = 60;
+        let timeLeft = maxTime;
+        let charIndex = 0;
+        let mistakes = 0;
+        let isTyping = false;
+
+        function loadParagraph() {
+            const randomIndex = Math.floor(Math.random() * paragraphs.length);
+            typingArea.innerHTML = "";
+            paragraphs[randomIndex].split("").forEach(char => {
+                let span = `<span>${char}</span>`;
+                typingArea.innerHTML += span;
+            });
+            typingArea.querySelectorAll("span")[0].classList.add("active");
+            
+            document.addEventListener("keydown", () => inputField.focus());
+            typingArea.addEventListener("click", () => inputField.focus());
+
+            // Reset stats
+            clearInterval(timer);
+            timeLeft = maxTime;
+            charIndex = 0;
+            mistakes = 0;
+            isTyping = false;
+            timeTag.innerText = timeLeft;
+            wpmTag.innerText = 0;
+            accuracyTag.innerText = 100;
+            inputField.value = "";
+        }
+
+        function initTyping() {
+            const characters = typingArea.querySelectorAll("span");
+            let typedChar = inputField.value.split("")[charIndex];
+
+            if (charIndex < characters.length && timeLeft > 0) {
+                if (!isTyping) {
+                    timer = setInterval(initTimer, 1000);
+                    isTyping = true;
+                }
+
+                if (typedChar == null) {
+                    if (charIndex > 0) {
+                        charIndex--;
+                        if (characters[charIndex].classList.contains("incorrect")) {
+                            mistakes--;
+                        }
+                        characters[charIndex].classList.remove("correct", "incorrect");
+                    }
+                } else {
+                    if (characters[charIndex].innerText === typedChar) {
+                        characters[charIndex].classList.add("correct");
+                    } else {
+                        mistakes++;
+                        characters[charIndex].classList.add("incorrect");
+                    }
+                    charIndex++;
+                }
+
+                characters.forEach(span => span.classList.remove("active"));
+                if (charIndex < characters.length) {
+                    characters[charIndex].classList.add("active");
+                }
+
+                let correctChars = charIndex - mistakes;
+                let totalTimeElapsed = maxTime - timeLeft;
+                let wpm = 0;
+                if (totalTimeElapsed > 0) {
+                    wpm = Math.round(((correctChars / 5) / (totalTimeElapsed / 60)));
+                }
+                wpmTag.innerText = wpm < 0 || !wpm || wpm === Infinity ? 0 : wpm;
+                
+                let accuracy = Math.round(((charIndex - mistakes) / charIndex) * 100);
+                accuracyTag.innerText = isNaN(accuracy) ? 100 : accuracy;
+            } else {
+                clearInterval(timer);
+                inputField.value = "";
+            }
+        }
+
+        function initTimer() {
+            if (timeLeft > 0) {
+                timeLeft--;
+                timeTag.innerText = timeLeft;
+                let correctChars = charIndex - mistakes;
+                let totalTimeElapsed = maxTime - timeLeft;
+                let wpm = Math.round(((correctChars / 5) / (totalTimeElapsed / 60)));
+                wpmTag.innerText = wpm < 0 || !wpm || wpm === Infinity ? 0 : wpm;
+            } else {
+                clearInterval(timer);
+            }
+        }
+
+        inputField.addEventListener("input", initTyping);
+        loadParagraph();
+    </script>
+</body>
+</html>
